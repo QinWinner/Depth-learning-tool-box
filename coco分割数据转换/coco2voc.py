@@ -1,3 +1,4 @@
+#coco分割数据转换为voc的分割数据
 from pycocotools.coco import COCO
 from coco2voc_aux import annsToSeg
 from PIL import Image
