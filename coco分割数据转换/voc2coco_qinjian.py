@@ -49,14 +49,15 @@ def convert(images_dir, labels_dir, json_save_path):
             if area<10.0:                                      #设置目标的最小面积，可以不设置，但是我再转换的过程中发现很多area=0.0 的情况，所以最好还是设置一下
                 continue
             
-            rect = cv2.minAreaRect(contour) # 得到最小外接矩形的（中心(x,y), (宽,高), 旋转角度）
-            box = cv2.boxPoints(rect)
+            #rect = cv2.minAreaRect(contour) # 得到最小外接矩形的（中心(x,y), (宽,高), 旋转角度）
+            #box = cv2.boxPoints(rect)
+			x, y, w, h = cv2.boundingRect(contour)
             annotation = {
                 "segmentation": [segmentation],
                 "area": area,
                 "iscrowd": 0,
                 "image_id": image_id,
-                "bbox": box.tolist(),
+                "bbox": [x, y, w, h],
                 "category_id": 1,
                 "id": bnd_id
             }
